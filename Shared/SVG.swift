@@ -24,7 +24,9 @@ struct SVGShape {
 
 struct SVG: Shape {
     func path(in rect: CGRect) -> Path {
-        return Path(svgShape.path)
+        var xf = CGAffineTransform(scaleX: rect.width / svgShape.width,
+                                   y: rect.height / svgShape.height)
+        return Path(svgShape.path.copy(using:&xf)!)
     }
 
     let svgShape: SVGShape
@@ -33,12 +35,6 @@ struct SVG: Shape {
         self.svgShape = svgShape
     }
 }
-
-/*
-extension SVG {
-    func fill()
-}
-*/
 
 // Frog by Ed Harrison from the Noun Project
 let s_frog = "M92.7,24.5l-4.5-1.9h-4.2v-0.1c0-2.7-2.2-4.8-4.8-4.8c-1.2,0-2.3,0.5-3.2,1.2c-2.1,0.3-3.7,1.8-4.4,3.7  c-5.3,0.3-10.4,2.1-14.8,5.2l-7.2,5l-15.8,5.1L15.8,55.5c-0.5,0.1-1,0.1-1.5,0.3l-2.8,0.4C7.8,56.7,5,59.8,5,63.5l0,0  c-0.1,2.5,1,4.9,2.8,6.5l10.7,10l23.3-0.1l3.7,0l3.3,2.2c0.2,0.1,0.5,0.1,0.7,0c0.3-0.2,0.3-0.7,0.1-1l-1.4-1.3l0.4,0l5.4,0l2.1,1.8  c0.3,0.2,0.6,0.2,0.8,0c0.4-0.3,0.4-0.9,0-1.1l-2.4-2.3h-5.4l-5.3-2.7h-6.9c1.2-0.3,2.3-1.1,2.8-2.2l0.1-0.1h9.9l5.2,4.3H71l4.1-1.1  l0.9,0.7c0.3,0.2,0.6,0.2,0.8,0c0.4-0.3,0.4-0.9,0-1.1l-1.3-1l-3.7,0.7h-4.2l5.1-2.4l1.4,0.9c0.2,0.1,0.6,0.1,0.8-0.1  c0.3-0.3,0.3-0.7,0-0.9l-1.8-1.5l-6,2.2H64l-1.8-1.2c0.7-0.9,0.7-2.1,0.1-3.1l-2.7-4l0.2-0.2l3.7,2.4h12.8l3.5-0.9l0.8,0.6  c0.2,0.2,0.5,0.2,0.7,0l0,0c0.3-0.2,0.3-0.7,0-1l-1.1-0.9L77,66h-3.7l4.5-2.1l1.2,0.8c0.2,0.1,0.5,0.1,0.7-0.1  c0.2-0.2,0.2-0.6,0-0.8l-1.6-1.3l-5.2,1.9h-2.7l-1.6-1c0.6-0.8,0.6-1.9,0.1-2.7L66.1,57l2.6-3.4l11.7-8.1l6.4-8.1l4.3-3.2l1.4-2.6  l0,0c1.1-0.4,2-1.3,2.3-2.4C95.5,27.2,94.5,25.2,92.7,24.5z M27.4,73.9L27.4,73.9l7.7,1.7L27.4,73.9z"
@@ -63,7 +59,7 @@ struct SVG_Previews: PreviewProvider {
                 .frame(width: svgHare.width, height: svgHare.height)
             SVG(svgCricket)
                 .fill(LinearGradient(gradient: Gradient(colors: [Color.green, Color.yellow]), startPoint: .leading, endPoint: .trailing))
-                .frame(width: svgCricket.width, height: svgCricket.height)
+                .frame(width: svgCricket.width * 2.0, height: svgCricket.height * 2.0)
         }
     }
 }
