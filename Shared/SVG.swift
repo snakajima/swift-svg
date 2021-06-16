@@ -7,20 +7,30 @@
 
 import SwiftUI
 
-struct SVG: Shape {
-    func path(in rect: CGRect) -> Path {
-        return Path(self.path)
-    }
-    
+struct SVGShape {
     static let emtyPath = CGPath(rect: .zero, transform: nil)
     let path: CGPath
     let size: CGSize
+    var width: CGFloat { size.width }
+    var height: CGFloat { size.height }
     init(_ svg: String) {
         let path = SVGParser.parse(svg) ?? Self.emtyPath
         let bounds = path.boundingBoxOfPath
         var xf = CGAffineTransform(translationX: -bounds.minX, y: -bounds.minY)
         self.path = path.copy(using: &xf) ?? Self.emtyPath
         self.size = bounds.size
+    }
+}
+
+struct SVG: Shape {
+    func path(in rect: CGRect) -> Path {
+        return Path(svgShape.path)
+    }
+
+    let svgShape: SVGShape
+    
+    init(_ svgShape: SVGShape) {
+        self.svgShape = svgShape
     }
 }
 
@@ -42,12 +52,18 @@ let s_cricket = "M95,45.1c0-0.1-0.1-0.2-0.2-0.2l-8.9,1.7c-0.1-0.2-0.1-0.4-0.2-0.
 struct SVG_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            SVG(s_frog)
+            let svgFrog = SVGShape(s_frog)
+            let svgHare = SVGShape(s_hare)
+            let svgCricket = SVGShape(s_cricket)
+            SVG(svgFrog)
                 .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
-            SVG(s_hare)
+                .frame(width: svgFrog.width, height: svgFrog.height)
+            SVG(svgHare)
                 .foregroundColor(.red)
-            SVG(s_cricket)
+                .frame(width: svgHare.width, height: svgHare.height)
+            SVG(svgCricket)
                 .fill(LinearGradient(gradient: Gradient(colors: [Color.red, Color.blue]), startPoint: .leading, endPoint: .trailing))
+                .frame(width: svgCricket.width, height: svgCricket.height)
         }
     }
 }
