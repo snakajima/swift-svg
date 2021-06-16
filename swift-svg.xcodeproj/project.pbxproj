@@ -15,6 +15,8 @@
 		7487FB0D267AAC7500E428F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7487FAF7267AAC7500E428F3 /* Assets.xcassets */; };
 		7487FB17267AACD100E428F3 /* SVG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7487FB16267AACD100E428F3 /* SVG.swift */; };
 		7487FB18267AACD100E428F3 /* SVG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7487FB16267AACD100E428F3 /* SVG.swift */; };
+		7487FB1A267AAFA700E428F3 /* SVGPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7487FB19267AAFA700E428F3 /* SVGPath.swift */; };
+		7487FB1B267AAFA700E428F3 /* SVGPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7487FB19267AAFA700E428F3 /* SVGPath.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +29,7 @@
 		7487FB06267AAC7500E428F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7487FB07267AAC7500E428F3 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
 		7487FB16267AACD100E428F3 /* SVG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVG.swift; sourceTree = "<group>"; };
+		7487FB19267AAFA700E428F3 /* SVGPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGPath.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +66,7 @@
 				7487FAF5267AAC7400E428F3 /* swift_svgApp.swift */,
 				7487FAF6267AAC7400E428F3 /* ContentView.swift */,
 				7487FB16267AACD100E428F3 /* SVG.swift */,
+				7487FB19267AAFA700E428F3 /* SVGPath.swift */,
 				7487FAF7267AAC7500E428F3 /* Assets.xcassets */,
 			);
 			path = Shared;
@@ -192,6 +196,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7487FB17267AACD100E428F3 /* SVG.swift in Sources */,
+				7487FB1A267AAFA700E428F3 /* SVGPath.swift in Sources */,
 				7487FB0A267AAC7500E428F3 /* ContentView.swift in Sources */,
 				7487FB08267AAC7500E428F3 /* swift_svgApp.swift in Sources */,
 			);
@@ -202,6 +207,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7487FB18267AACD100E428F3 /* SVG.swift in Sources */,
+				7487FB1B267AAFA700E428F3 /* SVGPath.swift in Sources */,
 				7487FB0B267AAC7500E428F3 /* ContentView.swift in Sources */,
 				7487FB09267AAC7500E428F3 /* swift_svgApp.swift in Sources */,
 			);
