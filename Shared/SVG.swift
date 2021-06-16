@@ -62,7 +62,7 @@ struct SVG_Previews: PreviewProvider {
                 .foregroundColor(.red)
                 .frame(width: svgHare.width, height: svgHare.height)
             SVG(svgCricket)
-                .fill(LinearGradient(gradient: Gradient(colors: [Color.red, Color.blue]), startPoint: .leading, endPoint: .trailing))
+                .fill(LinearGradient(gradient: Gradient(colors: [Color.green, Color.yellow]), startPoint: .leading, endPoint: .trailing))
                 .frame(width: svgCricket.width, height: svgCricket.height)
         }
     }
