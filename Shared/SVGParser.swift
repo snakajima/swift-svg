@@ -1,5 +1,5 @@
 //
-//  SVGPath.swift
+//  SVGParser.swift
 //  swift-svg
 //
 //  Created by SATOSHI NAKAJIMA on 6/16/21.
@@ -12,7 +12,7 @@ import Cocoa
 #endif
 
 /// A structure that defines a static parse functions
-public struct SwipePath {
+public struct SVGParser {
 
     private static let regexSVG = try! NSRegularExpression(pattern: "[a-z][0-9\\-\\.,\\s]*", options: NSRegularExpression.Options.caseInsensitive)
     private static let regexNUM = try! NSRegularExpression(pattern: "[\\-]*[0-9\\.]+", options: NSRegularExpression.Options())
@@ -24,7 +24,7 @@ public struct SwipePath {
         }
         
         //NSLog("SwipePath \(string)")
-        let matches = SwipePath.regexSVG.matches(in: string, options: NSRegularExpression.MatchingOptions(), range: NSMakeRange(0, string.count))
+        let matches = SVGParser.regexSVG.matches(in: string, options: NSRegularExpression.MatchingOptions(), range: NSMakeRange(0, string.count))
         //NSLog("SwipePath \(matches)")
         let path = CGMutablePath()
         var pt = CGPoint.zero
@@ -40,7 +40,7 @@ public struct SwipePath {
             prevOffset = match.range.location + match.range.length
             
             let params = string[start..<end]
-            let nums = SwipePath.regexNUM.matches(in: String(params), options: [], range: NSMakeRange(0, params.count))
+            let nums = SVGParser.regexNUM.matches(in: String(params), options: [], range: NSMakeRange(0, params.count))
             let p = nums.map({ (num) -> CGFloat in
                 let start = params.index(params.startIndex, offsetBy: num.range.location)
                 let end = params.index(start, offsetBy: num.range.length)
