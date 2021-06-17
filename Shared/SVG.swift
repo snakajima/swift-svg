@@ -24,24 +24,8 @@ struct SVGShape {
         self.path = path.copy(using: &xf) ?? Self.emtyPath
         self.size = bounds.size
     }
-}
-
-struct SVG: Shape {
-    func path(in rect: CGRect) -> Path {
-        var xf = CGAffineTransform(scaleX: rect.width / svgShape.width,
-                                   y: rect.height / svgShape.height)
-        return Path(svgShape.path.copy(using:&xf)!)
-    }
-
-    let svgShape: SVGShape
     
-    init(_ svgShape: SVGShape) {
-        self.svgShape = svgShape
-    }
-}
-
-extension SVG {
-    func morph(_ morph: @escaping (CGPoint) -> CGPoint) -> SVG {
+    func morphed(_ morph: @escaping (CGPoint) -> CGPoint) -> SVGShape {
         let path = CGMutablePath()
         typealias ApplyFunction = (CGPathElement) -> ()
         var apply: ApplyFunction = { element in
@@ -62,12 +46,25 @@ extension SVG {
             }
         }
         
-        self.svgShape.path.apply(info: &apply) { userInfo, elementPointer in
+        self.path.apply(info: &apply) { userInfo, elementPointer in
             let apply = userInfo!.assumingMemoryBound(to: ApplyFunction.self).pointee
             apply(elementPointer.pointee)
         }
-        let svgShape = SVGShape(path)
-        return SVG(svgShape)
+        return SVGShape(path)
+    }
+}
+
+struct SVG: Shape {
+    func path(in rect: CGRect) -> Path {
+        var xf = CGAffineTransform(scaleX: rect.width / svgShape.width,
+                                   y: rect.height / svgShape.height)
+        return Path(svgShape.path.copy(using:&xf)!)
+    }
+
+    let svgShape: SVGShape
+    
+    init(_ svgShape: SVGShape) {
+        self.svgShape = svgShape
     }
 }
 
@@ -117,21 +114,20 @@ struct SVG_Previews: PreviewProvider {
             SVG(svgCricket)
                 .fill(LinearGradient(gradient: Gradient(colors: [Color.green, Color.yellow]), startPoint: .leading, endPoint: .trailing))
                 .frame(width: svgCricket.width * 2.0, height: svgCricket.height * 2.0)
-            SVG(svgHare)
-                .morph { point in
-                    let ratio = point.y / svgHare.height
-                    let dx = svgHare.width * 0.4 * ratio * ratio
-                    return CGPoint(x: point.x + dx, y: point.y)
-                }
-                .frame(width: svgHare.width, height: svgHare.height)
-            SVG(svgTest)
-                .morph { point in
-                    print(point)
-                    let ratio = point.y / svgTest.height
-                    let dx = svgHare.width * 0 * ratio * ratio
-                    return CGPoint(x: point.x + dx, y: point.y)
-                }
-                .frame(width: svgTest.width, height: svgTest.height)
+            let svgHareMorphed = svgHare.morphed { point in
+                let ratio = point.y / svgHare.height
+                let dx = svgHare.width * 1.0 * ratio * ratio
+                return CGPoint(x: point.x + dx, y: point.y)
+            }
+            SVG(svgHareMorphed)
+                .frame(width: svgHareMorphed.width, height: svgHareMorphed.height)
+            let svgTestMorphed = svgTest.morphed { point in
+                let ratio = point.y / svgHare.height
+                let dx = svgTest.width * 1.0 * ratio * ratio
+                return CGPoint(x: point.x + dx, y: point.y)
+            }
+            SVG(svgTestMorphed)
+                .frame(width: svgTestMorphed.width, height: svgTestMorphed.height)
         }
     }
 }
