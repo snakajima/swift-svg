@@ -59,15 +59,20 @@ struct SVG_Previews: PreviewProvider {
                     .foregroundColor(.green)
                     .rotationEffect(Angle(degrees: 90))
                     .frame(width: svgFrog.width, height: svgFrog.height)
+                SVG(svgFrog)
+                    .trim(from: 0.0, to: 0.8)
+                    .stroke(Color.red)
+                    .frame(width: svgFrog.width, height: svgFrog.height)
             }
             HStack(alignment: .bottom) {
                 SVG(svgHare)
                     .foregroundColor(.red)
                     .frame(width: svgHare.width / 2.0, height: svgHare.height / 2.0)
                 SVG(svgHare)
-                    .foregroundColor(.blue)
+                    .fill(Color.blue)
                     .frame(width: svgHare.width, height: svgHare.height)
                 SVG(svgHare)
+                    .stroke(Color.yellow, lineWidth: 3.0)
                     .foregroundColor(.yellow)
                     .frame(width: svgHare.width * 2.0, height: svgHare.height * 2.0)
             }
