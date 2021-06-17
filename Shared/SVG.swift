@@ -41,31 +41,31 @@ struct SVG: Shape {
 }
 
 extension SVG {
-    func morph(_ morph:(CGPoint) -> CGPoint) -> SVG {
+    func morph(_ morph: @escaping (CGPoint) -> CGPoint) -> SVG {
         let path = CGMutablePath()
         typealias CallBack = (CGPathElement) -> ()
-        func foo(element: CGPathElement) {
+        func apply(element: CGPathElement) {
+            let points = element.points
             switch(element.type) {
             case .moveToPoint:
-                path.move(to: element.points[0])
+                path.move(to: morph(points[0]))
             case .addLineToPoint:
-                path.addLine(to: element.points[0])
+                path.addLine(to: morph(points[0]))
             case .addQuadCurveToPoint:
-                path.addQuadCurve(to: element.points[1], control: element.points[0])
+                path.addQuadCurve(to: morph(points[1]), control: morph(points[0]))
             case .addCurveToPoint:
-                path.addCurve(to: element.points[2], control1: element.points[0], control2: element.points[1])
+                path.addCurve(to: morph(points[2]), control1: morph(points[0]), control2: morph(points[1]))
             case .closeSubpath:
                 path.closeSubpath()
             @unknown default:
                 break
             }
         }
-        var callback = foo
+        var callback = apply
         
         self.svgShape.path.apply(info: &callback) { userInfo, elementPointer in
-            let element = elementPointer.pointee
             let callback = userInfo!.assumingMemoryBound(to: CallBack.self).pointee
-            callback(element)
+            callback(elementPointer.pointee)
         }
         let svgShape = SVGShape(path)
         return SVG(svgShape)
@@ -116,9 +116,9 @@ struct SVG_Previews: PreviewProvider {
                 .fill(LinearGradient(gradient: Gradient(colors: [Color.green, Color.yellow]), startPoint: .leading, endPoint: .trailing))
                 .frame(width: svgCricket.width * 2.0, height: svgCricket.height * 2.0)
             SVG(svgHare)
-                .morph{ point in
+                .morph { point in
                     let ratio = point.y / svgHare.height
-                    let dx = svgHare.width / 2 * ratio * ratio
+                    let dx = svgHare.width * ratio * ratio
                     return CGPoint(x: point.x + dx, y: point.y)
                 }
                 .frame(width: svgHare.width * 2, height: svgHare.height * 2)
