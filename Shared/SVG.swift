@@ -44,7 +44,7 @@ extension SVG {
     func morph(_ morph: @escaping (CGPoint) -> CGPoint) -> SVG {
         let path = CGMutablePath()
         typealias CallBack = (CGPathElement) -> ()
-        func apply(element: CGPathElement) {
+        var callback: CallBack = { element in
             let points = element.points
             switch(element.type) {
             case .moveToPoint:
@@ -61,7 +61,6 @@ extension SVG {
                 break
             }
         }
-        var callback = apply
         
         self.svgShape.path.apply(info: &callback) { userInfo, elementPointer in
             let callback = userInfo!.assumingMemoryBound(to: CallBack.self).pointee
