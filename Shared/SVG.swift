@@ -15,6 +15,10 @@ struct SVGShape {
     var height: CGFloat { size.height }
     init(_ svg: String) {
         let path = SVGParser.parse(svg) ?? Self.emtyPath
+        self.init(path)
+    }
+    
+    init(_ path: CGPath) {
         let bounds = path.boundingBoxOfPath
         var xf = CGAffineTransform(translationX: -bounds.minX, y: -bounds.minY)
         self.path = path.copy(using: &xf) ?? Self.emtyPath
