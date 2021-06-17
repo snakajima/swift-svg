@@ -126,6 +126,7 @@ struct SVG_Previews: PreviewProvider {
                 .frame(width: svgHare.width, height: svgHare.height)
             SVG(svgTest)
                 .morph { point in
+                    print(point)
                     let ratio = point.y / svgTest.height
                     let dx = svgHare.width * 0 * ratio * ratio
                     return CGPoint(x: point.x + dx, y: point.y)
