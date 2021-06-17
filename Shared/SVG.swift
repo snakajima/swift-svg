@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SVGShape {
+struct SVGPath {
     static let emtyPath = CGPath(rect: .zero, transform: nil)
     let path: CGPath
     let size: CGSize
@@ -25,7 +25,7 @@ struct SVGShape {
         self.size = bounds.size
     }
     
-    func morphed(_ morph: @escaping (CGPoint) -> CGPoint) -> SVGShape {
+    func morphed(_ morph: @escaping (CGPoint) -> CGPoint) -> SVGPath {
         let path = CGMutablePath()
         typealias ApplyFunction = (CGPathElement) -> ()
         var apply: ApplyFunction = { element in
@@ -50,7 +50,7 @@ struct SVGShape {
             let apply = userInfo!.assumingMemoryBound(to: ApplyFunction.self).pointee
             apply(elementPointer.pointee)
         }
-        return SVGShape(path)
+        return SVGPath(path)
     }
 }
 
@@ -61,9 +61,9 @@ struct SVG: Shape {
         return Path(svgShape.path.copy(using:&xf)!)
     }
 
-    let svgShape: SVGShape
+    let svgShape: SVGPath
     
-    init(_ svgShape: SVGShape) {
+    init(_ svgShape: SVGPath) {
         self.svgShape = svgShape
     }
 }
@@ -82,10 +82,10 @@ let s_test = "M0,0 l20,20 l-20,20 l20,20 l-20,20 l20,20 l-20,20 l20,20 l-20,20z"
 struct SVG_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            let svgFrog = SVGShape(s_frog)
-            let svgHare = SVGShape(s_hare)
-            let svgCricket = SVGShape(s_cricket)
-            let svgTest = SVGShape(s_test)
+            let svgFrog = SVGPath(s_frog)
+            let svgHare = SVGPath(s_hare)
+            let svgCricket = SVGPath(s_cricket)
+            let svgTest = SVGPath(s_test)
             HStack {
                 SVG(svgFrog)
                     .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
@@ -116,14 +116,14 @@ struct SVG_Previews: PreviewProvider {
                 .frame(width: svgCricket.width * 2.0, height: svgCricket.height * 2.0)
             let svgHareMorphed = svgHare.morphed { point in
                 let ratio = point.y / svgHare.height
-                let dx = svgHare.width * 1.0 * ratio * ratio
+                let dx = svgHare.width * 0.5 * ratio * ratio * ratio
                 return CGPoint(x: point.x + dx, y: point.y)
             }
             SVG(svgHareMorphed)
                 .frame(width: svgHareMorphed.width, height: svgHareMorphed.height)
             let svgTestMorphed = svgTest.morphed { point in
                 let ratio = point.y / svgHare.height
-                let dx = svgTest.width * 1.0 * ratio * ratio
+                let dx = svgTest.width * 2.0 * ratio * ratio
                 return CGPoint(x: point.x + dx, y: point.y)
             }
             SVG(svgTestMorphed)
