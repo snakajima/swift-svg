@@ -42,7 +42,26 @@ struct SVG: Shape {
 
 extension SVG {
     func morph() -> SVG {
-        let path = self.svgShape.path
+        var path = CGMutablePath()
+        
+        self.svgShape.path.apply(info: &path) { userInfo, elementPointer in
+            let element = elementPointer.pointee
+            let path = userInfo!.assumingMemoryBound(to: CGMutablePath.self).pointee
+            switch(element.type) {
+            case .moveToPoint:
+                path.move(to: element.points[0])
+            case .addLineToPoint:
+                path.addLine(to: element.points[0])
+            case .addQuadCurveToPoint:
+                path.addQuadCurve(to: element.points[1], control: element.points[0])
+            case .addCurveToPoint:
+                path.addCurve(to: element.points[2], control1: element.points[0], control2: element.points[1])
+            case .closeSubpath:
+                path.closeSubpath()
+            @unknown default:
+                break
+            }
+        }
         let svgShape = SVGShape(path)
         return SVG(svgShape)
     }
@@ -91,9 +110,9 @@ struct SVG_Previews: PreviewProvider {
             SVG(svgCricket)
                 .fill(LinearGradient(gradient: Gradient(colors: [Color.green, Color.yellow]), startPoint: .leading, endPoint: .trailing))
                 .frame(width: svgCricket.width * 2.0, height: svgCricket.height * 2.0)
-            SVG(svgCricket)
+            SVG(svgHare)
                 .morph()
-                .frame(width: svgCricket.width, height: svgCricket.height)
+                .frame(width: svgHare.width * 2, height: svgHare.height * 2)
         }
     }
 }
