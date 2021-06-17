@@ -42,11 +42,9 @@ struct SVG: Shape {
 
 extension SVG {
     func morph(_ morph:(CGPoint) -> CGPoint) -> SVG {
-        var path = CGMutablePath()
-        
-        self.svgShape.path.apply(info: &path) { userInfo, elementPointer in
-            let element = elementPointer.pointee
-            let path = userInfo!.assumingMemoryBound(to: CGMutablePath.self).pointee
+        let path = CGMutablePath()
+        typealias CallBack = (CGPathElement) -> ()
+        func foo(element: CGPathElement) {
             switch(element.type) {
             case .moveToPoint:
                 path.move(to: element.points[0])
@@ -61,6 +59,13 @@ extension SVG {
             @unknown default:
                 break
             }
+        }
+        var callback = foo
+        
+        self.svgShape.path.apply(info: &callback) { userInfo, elementPointer in
+            let element = elementPointer.pointee
+            let callback = userInfo!.assumingMemoryBound(to: CallBack.self).pointee
+            callback(element)
         }
         let svgShape = SVGShape(path)
         return SVG(svgShape)
