@@ -41,7 +41,7 @@ struct SVG: Shape {
 }
 
 extension SVG {
-    func morph() -> SVG {
+    func morph(_ morph:(CGPoint) -> CGPoint) -> SVG {
         var path = CGMutablePath()
         
         self.svgShape.path.apply(info: &path) { userInfo, elementPointer in
@@ -111,7 +111,11 @@ struct SVG_Previews: PreviewProvider {
                 .fill(LinearGradient(gradient: Gradient(colors: [Color.green, Color.yellow]), startPoint: .leading, endPoint: .trailing))
                 .frame(width: svgCricket.width * 2.0, height: svgCricket.height * 2.0)
             SVG(svgHare)
-                .morph()
+                .morph{ point in
+                    let ratio = point.y / svgHare.height
+                    let dx = svgHare.width / 2 * ratio * ratio
+                    return CGPoint(x: point.x + dx, y: point.y)
+                }
                 .frame(width: svgHare.width * 2, height: svgHare.height * 2)
         }
     }
