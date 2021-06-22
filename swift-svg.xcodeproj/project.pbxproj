@@ -30,6 +30,8 @@
 		7487FB07267AAC7500E428F3 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
 		7487FB16267AACD100E428F3 /* SVG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVG.swift; sourceTree = "<group>"; };
 		7487FB19267AAFA700E428F3 /* SVGParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGParser.swift; sourceTree = "<group>"; };
+		7487FB352682436400E428F3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		7487FB362682437500E428F3 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,23 +55,21 @@
 		7487FAEF267AAC7400E428F3 = {
 			isa = PBXGroup;
 			children = (
-				7487FAF4267AAC7400E428F3 /* Shared */,
-				7487FAFE267AAC7500E428F3 /* iOS */,
-				7487FB05267AAC7500E428F3 /* macOS */,
+				7487FB352682436400E428F3 /* README.md */,
+				7487FB362682437500E428F3 /* Package.swift */,
+				7487FAF4267AAC7400E428F3 /* Sources */,
+				7487FB372682440D00E428F3 /* Sample */,
 				7487FAFD267AAC7500E428F3 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		7487FAF4267AAC7400E428F3 /* Shared */ = {
+		7487FAF4267AAC7400E428F3 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				7487FAF5267AAC7400E428F3 /* swift_svgApp.swift */,
-				7487FAF6267AAC7400E428F3 /* ContentView.swift */,
 				7487FB16267AACD100E428F3 /* SVG.swift */,
 				7487FB19267AAFA700E428F3 /* SVGParser.swift */,
-				7487FAF7267AAC7500E428F3 /* Assets.xcassets */,
 			);
-			path = Shared;
+			path = Sources;
 			sourceTree = "<group>";
 		};
 		7487FAFD267AAC7500E428F3 /* Products */ = {
@@ -96,6 +96,18 @@
 				7487FB07267AAC7500E428F3 /* macOS.entitlements */,
 			);
 			path = macOS;
+			sourceTree = "<group>";
+		};
+		7487FB372682440D00E428F3 /* Sample */ = {
+			isa = PBXGroup;
+			children = (
+				7487FAF5267AAC7400E428F3 /* swift_svgApp.swift */,
+				7487FAF6267AAC7400E428F3 /* ContentView.swift */,
+				7487FB05267AAC7500E428F3 /* macOS */,
+				7487FAFE267AAC7500E428F3 /* iOS */,
+				7487FAF7267AAC7500E428F3 /* Assets.xcassets */,
+			);
+			path = Sample;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -335,7 +347,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H34BY2CCCD;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = iOS/Info.plist;
+				INFOPLIST_FILE = Sample/iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -357,7 +369,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H34BY2CCCD;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = iOS/Info.plist;
+				INFOPLIST_FILE = Sample/iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -383,7 +395,7 @@
 				DEVELOPMENT_TEAM = H34BY2CCCD;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = macOS/Info.plist;
+				INFOPLIST_FILE = Sample/macOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -407,7 +419,7 @@
 				DEVELOPMENT_TEAM = H34BY2CCCD;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = macOS/Info.plist;
+				INFOPLIST_FILE = Sample/macOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",

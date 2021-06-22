@@ -4,12 +4,12 @@
 import PackageDescription
 
 let package = Package(
-    name: "bar",
+    name: "swift-svg",
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
-            name: "bar",
-            targets: ["bar"]),
+            name: "swift-svg",
+            targets: ["swift-svg"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -19,10 +19,10 @@ let package = Package(
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
-            name: "bar",
+            name: "swift-svg",
             dependencies: []),
         .testTarget(
             name: "barTests",
-            dependencies: ["bar"]),
+            dependencies: ["swift-svg"]),
     ]
 )
