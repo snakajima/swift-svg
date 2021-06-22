@@ -5,11 +5,7 @@
 //  Created by SATOSHI NAKAJIMA on 6/16/21.
 //
 
-#if os(iOS) || os(watchOS) || os(tvOS)
-import UIKit
-#elseif os(macOS)
-import Cocoa
-#endif
+import QuartzCore
 
 /// A structure that defines a static parse functions
 public struct SVGParser {

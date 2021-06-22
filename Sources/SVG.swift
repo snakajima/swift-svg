@@ -9,15 +9,15 @@ import SwiftUI
 
 struct SVG: Shape {
     func path(in rect: CGRect) -> Path {
-        var xf = CGAffineTransform(scaleX: rect.width / svgShape.width,
-                                   y: rect.height / svgShape.height)
-        return Path(svgShape.path.copy(using:&xf)!)
+        var xf = CGAffineTransform(scaleX: rect.width / svgPath.width,
+                                   y: rect.height / svgPath.height)
+        return Path(svgPath.path.copy(using:&xf)!)
     }
 
-    let svgShape: SVGPath
+    let svgPath: SVGPath
     
-    init(_ svgShape: SVGPath) {
-        self.svgShape = svgShape
+    init(_ svgPath: SVGPath) {
+        self.svgPath = svgPath
     }
 }
 
