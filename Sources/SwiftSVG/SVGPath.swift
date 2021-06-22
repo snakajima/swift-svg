@@ -9,23 +9,23 @@ import QuartzCore
 
 public struct SVGPath {
     static let emtyPath = CGPath(rect: .zero, transform: nil)
-    let path: CGPath
-    let size: CGSize
-    var width: CGFloat { size.width }
-    var height: CGFloat { size.height }
-    init(_ svg: String) {
+    public let path: CGPath
+    public let size: CGSize
+    public var width: CGFloat { size.width }
+    public var height: CGFloat { size.height }
+    public init(_ svg: String) {
         let path = SVGParser.parse(svg) ?? Self.emtyPath
         self.init(path)
     }
     
-    init(_ path: CGPath) {
+    public init(_ path: CGPath) {
         let bounds = path.boundingBoxOfPath
         var xf = CGAffineTransform(translationX: -bounds.minX, y: -bounds.minY)
         self.path = path.copy(using: &xf) ?? Self.emtyPath
         self.size = bounds.size
     }
     
-    func morphed(_ morph: @escaping (CGPoint) -> CGPoint) -> SVGPath {
+    public func morphed(_ morph: @escaping (CGPoint) -> CGPoint) -> SVGPath {
         let path = CGMutablePath()
         typealias ApplyFunction = (CGPathElement) -> ()
         var apply: ApplyFunction = { element in

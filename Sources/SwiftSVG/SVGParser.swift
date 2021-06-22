@@ -14,7 +14,7 @@ public struct SVGParser {
     private static let regexNUM = try! NSRegularExpression(pattern: "[\\-]*[0-9\\.]+", options: NSRegularExpression.Options())
 
     /// Parses a SVG style path and reurns a CGPath
-    static func parse(_ shape:Any?) -> CGPath? {
+    public static func parse(_ shape:Any?) -> CGPath? {
         guard let string = shape as? String else {
             return nil
         }

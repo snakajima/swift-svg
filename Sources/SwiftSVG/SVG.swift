@@ -14,9 +14,9 @@ public struct SVG: Shape {
         return Path(svgPath.path.copy(using:&xf)!)
     }
 
-    let svgPath: SVGPath
+    public let svgPath: SVGPath
     
-    init(_ svgPath: SVGPath) {
+    public init(_ svgPath: SVGPath) {
         self.svgPath = svgPath
     }
 }
