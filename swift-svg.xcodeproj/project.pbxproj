@@ -69,7 +69,7 @@
 		7487FAF4267AAC7400E428F3 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				7487FB62268251EA00E428F3 /* swift-svg */,
+				7487FB62268251EA00E428F3 /* SwiftSVG */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -112,14 +112,14 @@
 			path = Sample;
 			sourceTree = "<group>";
 		};
-		7487FB62268251EA00E428F3 /* swift-svg */ = {
+		7487FB62268251EA00E428F3 /* SwiftSVG */ = {
 			isa = PBXGroup;
 			children = (
 				7487FB16267AACD100E428F3 /* SVG.swift */,
 				7487FB382682464500E428F3 /* SVGPath.swift */,
 				7487FB19267AAFA700E428F3 /* SVGParser.swift */,
 			);
-			path = "swift-svg";
+			path = SwiftSVG;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
