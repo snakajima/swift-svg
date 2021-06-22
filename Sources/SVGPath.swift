@@ -7,7 +7,7 @@
 
 import QuartzCore
 
-struct SVGPath {
+public struct SVGPath {
     static let emtyPath = CGPath(rect: .zero, transform: nil)
     let path: CGPath
     let size: CGSize

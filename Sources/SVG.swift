@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct SVG: Shape {
-    func path(in rect: CGRect) -> Path {
+public struct SVG: Shape {
+    public func path(in rect: CGRect) -> Path {
         var xf = CGAffineTransform(scaleX: rect.width / svgPath.width,
                                    y: rect.height / svgPath.height)
         return Path(svgPath.path.copy(using:&xf)!)
@@ -31,15 +31,18 @@ struct SVG_Previews: PreviewProvider {
             VStack {
                 SVG(svgHare)
                     .foregroundColor(.red)
-                    .frame(width: svgHare.width, height: svgHare.height)
-                    .scaleEffect(CGSize(width: 0.5, height: 0.5))
+                    .frame(width: svgHare.width / 2, height: svgHare.height / 2)
                 SVG(svgHare)
                     .fill(LinearGradient(gradient: Gradient(colors: [Color.green, Color.yellow]), startPoint: .leading, endPoint: .trailing))
                     .frame(width: svgHare.width, height: svgHare.height)
                 SVG(svgHare)
-                    .stroke(Color.yellow, lineWidth: 3.0)
                     .foregroundColor(.yellow)
                     .frame(width: svgHare.width * 2.0, height: svgHare.height * 2.0)
+                    .overlay(
+                        SVG(svgHare)
+                            .stroke(Color.blue, lineWidth: 3.0)
+                            .foregroundColor(.gray)
+                    )
             }
         }
     }

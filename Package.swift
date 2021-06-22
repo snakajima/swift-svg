@@ -21,8 +21,5 @@ let package = Package(
         .target(
             name: "swift-svg",
             dependencies: []),
-        .testTarget(
-            name: "barTests",
-            dependencies: ["swift-svg"]),
     ]
 )
