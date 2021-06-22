@@ -17,6 +17,8 @@
 		7487FB18267AACD100E428F3 /* SVG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7487FB16267AACD100E428F3 /* SVG.swift */; };
 		7487FB1A267AAFA700E428F3 /* SVGParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7487FB19267AAFA700E428F3 /* SVGParser.swift */; };
 		7487FB1B267AAFA700E428F3 /* SVGParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7487FB19267AAFA700E428F3 /* SVGParser.swift */; };
+		7487FB392682464500E428F3 /* SVGPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7487FB382682464500E428F3 /* SVGPath.swift */; };
+		7487FB3A2682464500E428F3 /* SVGPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7487FB382682464500E428F3 /* SVGPath.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,7 @@
 		7487FB19267AAFA700E428F3 /* SVGParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGParser.swift; sourceTree = "<group>"; };
 		7487FB352682436400E428F3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		7487FB362682437500E428F3 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		7487FB382682464500E428F3 /* SVGPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGPath.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +70,7 @@
 			isa = PBXGroup;
 			children = (
 				7487FB16267AACD100E428F3 /* SVG.swift */,
+				7487FB382682464500E428F3 /* SVGPath.swift */,
 				7487FB19267AAFA700E428F3 /* SVGParser.swift */,
 			);
 			path = Sources;
@@ -208,6 +212,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7487FB17267AACD100E428F3 /* SVG.swift in Sources */,
+				7487FB392682464500E428F3 /* SVGPath.swift in Sources */,
 				7487FB1A267AAFA700E428F3 /* SVGParser.swift in Sources */,
 				7487FB0A267AAC7500E428F3 /* ContentView.swift in Sources */,
 				7487FB08267AAC7500E428F3 /* swift_svgApp.swift in Sources */,
@@ -219,6 +224,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7487FB18267AACD100E428F3 /* SVG.swift in Sources */,
+				7487FB3A2682464500E428F3 /* SVGPath.swift in Sources */,
 				7487FB1B267AAFA700E428F3 /* SVGParser.swift in Sources */,
 				7487FB0B267AAC7500E428F3 /* ContentView.swift in Sources */,
 				7487FB09267AAC7500E428F3 /* swift_svgApp.swift in Sources */,
@@ -389,7 +395,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Sample/macOS/macOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = H34BY2CCCD;
@@ -413,7 +419,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Sample/macOS/macOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = H34BY2CCCD;
